@@ -9,24 +9,22 @@ export const DataProvider =({children})=>{
   const [moviesData, setMoviesData] = useState(JSON.parse(localStorage.getItem("moviesData")) || state.data);
   const [searchValue, setSearchValue] = useState("");
 
-  
+
   useEffect(()=>{
     localStorage.setItem("moviesData", JSON.stringify(state.data));
+    setMoviesData(state.data)
 }, [state.data])
-
-console.log(state.year);
-console.log(state.rating);
-console.log(state.genre);
-
 
 
     const handleStar=(id)=>{
-        const updatedmoviesData = moviesData.map(movie=> movie.id === id ? {...movie, star: movie?.star ? false : true} : movie);
+        const updatedmoviesData = state.data.map(movie=> movie.id === id ? {...movie, star: movie?.star ? false : true} : movie);
         setMoviesData(updatedmoviesData )
+        dispatch({type:"ADD_DATA", payload:updatedmoviesData })
         }
         const handleWatchList =(id)=>{
-            const updatedmoviesData = moviesData.map(movie=> movie.id === id ? {...movie, watchlist: movie?.watchlist ? false : true} : movie);
+            const updatedmoviesData = state.data.map(movie=> movie.id === id ? {...movie, watchlist: movie?.watchlist ? false : true} : movie);
             setMoviesData(updatedmoviesData )
+            dispatch({type:"ADD_DATA", payload:updatedmoviesData })
             }
 
    

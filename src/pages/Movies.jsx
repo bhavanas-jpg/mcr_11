@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useData } from "../context/DataContext";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
@@ -36,7 +36,14 @@ const Movies = () => {
  let releaseYearFilteredMovies = year !== "0" ? genreFilteredMovies.filter(movie => movie?.year === Number(year)) : genreFilteredMovies;
  let ratingFilteredMovies = rating !== "0" ? releaseYearFilteredMovies.filter(movie => movie?.rating === Number(rating)  ):releaseYearFilteredMovies;
 
- 
+ useEffect(()=>{
+
+ }, [moviesData])
+
+
+
+console.log(state.data, "new movie");
+
   return (
     <div >
       <Navbar />
@@ -104,10 +111,10 @@ const Movies = () => {
               <button
                 onClick={() => {
                   handleStar(movie?.id);
-                  dispatch({
-                    type: "ADD_STAR",
-                    payload: movie,
-                  });
+                  // dispatch({
+                  //   type: "ADD_STAR",
+                  //   payload: movie,
+                  // });
                 }}
               >
                 {movie?.star ? "Starred" : "Star"}{" "}

@@ -2,8 +2,8 @@ import React from "react";
 import { movies } from "../data/movies";
 const DataReducer = () => {
   const initialState = {
-    data: (() => JSON.parse(localStorage.getItem("inventoryData")) || movies)(),
-    starMovies: [],
+    data: (() => JSON.parse(localStorage.getItem("moviesData")) || movies)(),
+    starMovies: (() => JSON.parse(localStorage.getItem("starMoviesData")) || [])(),
     watchListMovies: [],
     genre: "All Genre",
     year: "0",
@@ -12,16 +12,16 @@ const DataReducer = () => {
 
   const reducer = (state, action) => {
     switch (action.type) {
-      case "ADD_STAR":
-        return {
-          ...state,
-          starMovies: [...state.starMovies, action.payload],
-        };
-      case "ADD_WATCHLIST":
-        return {
-          ...state,
-          watchListMovies: [...state.watchListMovies, action.payload],
-        };
+    //   case "ADD_STAR":
+    //     return {
+    //       ...state,
+    //       starMovies: [...state.starMovies, action.payload],
+    //     };
+    //   case "ADD_WATCHLIST":
+    //     return {
+    //       ...state,
+    //       watchListMovies: [...state.watchListMovies, action.payload],
+    //     };
       case "FILTER_GENRE":
         return {
           ...state,
@@ -37,7 +37,16 @@ const DataReducer = () => {
           ...state,
           rating: action.payload,
         };
-
+      case "ADD_MOVIE":
+        return{
+        ...state,
+        data: [...state.data, action.payload]
+        }
+    case "ADD_DATA":
+        return{
+            ...state,
+            data: action.payload
+        }
       default:
         return state;
     }
