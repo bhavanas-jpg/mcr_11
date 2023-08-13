@@ -1,19 +1,25 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Explore from './pages/Explore'
-import Home from './pages/Home'
 import Navbar from './components/Navbar'
+import Movies from './pages/Movies'
+import StarredMovies from './pages/StarredMovies'
+import WatchList from './pages/WatchList'
+import MovieDetails from './pages/MovieDetails'
+import AddMovieForm from './components/AddMovieForm'
 
 function App() {
  
 
   return (
     <>
-    <Navbar />
+   
      <Routes>
-     <Route path="/" element={<Home />}/>
-     <Route path="/explore" element={<Explore />}/>
+     <Route path="/" element={<Movies/>}/>
+     <Route path="/watchlist" element={<WatchList />}/>
+     <Route path="/starredMovies" element={<StarredMovies />}/>
+     <Route path="/movieDetails/:id"  element={<MovieDetails/>} />
+     <Route path="/addMovie" element={<AddMovieForm/>}/>
      </Routes>
     </>
   )

@@ -3,3 +3,47 @@
   padding: 0;
   margin: 0;
 }
+nav{
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  background: gray;
+  color: #fff;
+}
+.container{
+  width: 80%;
+  margin: 0 auto
+}
+.card{
+  width: 200px;
+  border: 1px solid gray;
+  border-radius: 2px;
+}
+.movie__container{
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.filter__sec{
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.btn__container{
+  display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+}
+.btn__container button{
+background-color: #000;
+color: #fff;
+padding: 5px;
+border: none;
+outline: none;
+cursor: pointer;
+}
+.movie__detail{
+  display: flex;
+  gap: 2rem;
+  margin: 2rem;
+}

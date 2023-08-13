@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 import DataReducer from "../reducer/DataReducer";
 
 export const DataContext = createContext(null);
@@ -6,15 +6,40 @@ export const DataContext = createContext(null);
 export const DataProvider =({children})=>{
   const {initialState, reducer} = DataReducer();
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [moviesData, setMoviesData] = useState(JSON.parse(localStorage.getItem("moviesData")) || state.data);
+  const [searchValue, setSearchValue] = useState("");
+
+  
+  useEffect(()=>{
+    localStorage.setItem("moviesData", JSON.stringify(state.data));
+}, [state.data])
+
+console.log(state.year);
+console.log(state.rating);
+console.log(state.genre);
 
 
-    let name="Bhavana";
+
+    const handleStar=(id)=>{
+        const updatedmoviesData = moviesData.map(movie=> movie.id === id ? {...movie, star: movie?.star ? false : true} : movie);
+        setMoviesData(updatedmoviesData )
+        }
+        const handleWatchList =(id)=>{
+            const updatedmoviesData = moviesData.map(movie=> movie.id === id ? {...movie, watchlist: movie?.watchlist ? false : true} : movie);
+            setMoviesData(updatedmoviesData )
+            }
+
+   
 return(
     <DataContext.Provider
     value={{
-        name,
+        moviesData,
         state, 
-        dispatch
+        dispatch,
+        searchValue,
+        setSearchValue,
+        handleStar,
+        handleWatchList
     
     }}
     >
@@ -24,3 +49,14 @@ return(
 }
 
 export const useData=()=> useContext(DataContext);
+
+/**
+ * const [inventoryData, setInventoryData] = useState(JSON.parse(localStorage.getItem("inventoryData")) || state.data);
+    const [filterContainer, setFilterContainer] = useState(true);
+
+
+    useEffect(()=>{
+      localStorage.setItem("inventoryData", JSON.stringify(state.data));
+  }, [state.data])
+
+ */
